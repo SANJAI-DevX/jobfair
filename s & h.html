@@ -1,216 +1,890 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>s&h block</title>
-    <link rel="icon" href="img/csbs logo.png">
-    <link rel="stylesheet" href="style.css">
+    <title>S&H Block - Job Fair</title>
+    <link rel="icon" href="./images/Logo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        .dotted-line {
-            border-top: 1px dotted #000; /* 1px line, dotted, black color */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-       
-    .Venue{
-        padding: 20px;
-    }
-  
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .top-bar {
+            background: linear-gradient(90deg, #2c3e50, #3498db);
+            height: 4px;
+            animation: slideIn 2s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        .header {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 49%, rgba(52, 152, 219, 0.05) 50%, transparent 51%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .logo {
+            width: 180px;
+            height: auto;
+            margin-bottom: 15px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 15px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .navigation {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid transparent;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: #3498db;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .nav-link i {
+            margin-right: 8px;
+        }
+
+        .divider {
+            height: 3px;
+            background: linear-gradient(90deg, #3498db, #2980b9);
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .main-title {
+            text-align: center;
+            font-size: 3rem;
+            color: #2c3e50;
+            margin-bottom: 40px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+        }
+
+        .main-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #2980b9);
+            border-radius: 2px;
+        }
+
+        .department-info {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 10px 25px rgba(39, 174, 96, 0.3);
+        }
+
+        .department-info h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .department-info p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .company-card {
+            background: white;
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid transparent;
+        }
+
+        .company-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #2980b9);
+        }
+
+        .company-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+            border-color: #3498db;
+        }
+
+        .company-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .company-logo {
+            flex-shrink: 0;
+        }
+
+        .company-logo img {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            background: white;
+            padding: 6px;
+        }
+
+        .company-logo img:hover {
+            transform: scale(1.05);
+        }
+
+        .company-info {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .company-name {
+            font-size: 1rem;
+            color: #2c3e50;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            line-height: 1.3;
+        }
+
+        .venue-info {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .venue-info i {
+            font-size: 0.9rem;
+        }
+
+        .updates-section {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 8px;
+            padding: 10px;
+            border-left: 3px solid #e74c3c;
+        }
+
+        .updates-header {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 6px;
+        }
+
+        .updates-title {
+            color: #e74c3c;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .updates-content {
+            background: linear-gradient(90deg, #e74c3c, #c0392b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 0.7rem;
+            font-weight: 600;
+            animation: slideText 8s linear infinite;
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        @keyframes slideText {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .block-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        .footer-text {
+            animation: slideFooter 15s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes slideFooter {
+            0% { transform: translateX(100vw); }
+            100% { transform: translateX(-100%); }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 10px 8px;
+            }
+
+            .header h1 {
+                font-size: 0.9rem;
+                line-height: 1.3;
+                margin: 8px 0;
+                letter-spacing: 0.3px;
+            }
+
+            .logo {
+                width: 90px;
+                margin-bottom: 8px;
+            }
+
+            .main-title {
+                font-size: 1.4rem;
+                letter-spacing: 0.5px;
+                margin-bottom: 15px;
+            }
+
+            .container {
+                padding: 0 10px;
+                margin: 15px auto;
+            }
+
+            .companies-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                margin-top: 20px;
+            }
+
+            .company-card {
+                padding: 10px 6px;
+                border-radius: 12px;
+            }
+
+            .company-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 8px;
+            }
+
+            .company-logo img {
+                width: 60px;
+                height: 60px;
+                padding: 4px;
+            }
+
+            .company-name {
+                font-size: 0.75rem;
+                margin-bottom: 6px;
+            }
+
+            .venue-info {
+                font-size: 0.65rem;
+                padding: 5px 8px;
+                border-radius: 6px;
+            }
+
+            .updates-title {
+                font-size: 0.65rem;
+            }
+
+            .updates-content {
+                font-size: 0.6rem;
+            }
+
+            .department-info h2 {
+                font-size: 1.2rem;
+            }
+
+            .department-info p {
+                font-size: 0.9rem;
+            }
+
+            .footer {
+                padding: 10px;
+                font-size: 0.7rem;
+            }
+
+            .block-badge {
+                font-size: 0.5rem;
+                padding: 3px 6px;
+                top: 5px;
+                right: 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 0.75rem;
+                line-height: 1.2;
+                margin: 5px 0;
+                letter-spacing: 0.2px;
+            }
+
+            .logo {
+                width: 180px !important;
+               background: none;
+            }
+
+            .main-title {
+                font-size: 1.1rem;
+                letter-spacing: 0.3px;
+                margin-bottom: 12px;
+            }
+
+            .container {
+                padding: 0 8px;
+                margin: 10px auto;
+            }
+
+            .company-card {
+                padding: 8px 5px;
+                border-radius: 10px;
+            }
+
+            .company-logo img {
+                width: 50px;
+                height: 50px;
+                padding: 3px;
+            }
+
+            .company-name {
+                font-size: 0.7rem;
+                margin-bottom: 5px;
+            }
+
+            .venue-info {
+                font-size: 0.6rem;
+                padding: 4px 6px;
+            }
+
+            .updates-title {
+                font-size: 0.6rem;
+            }
+
+            .updates-content {
+                font-size: 0.55rem;
+            }
+
+            .department-info h2 {
+                font-size: 1rem;
+            }
+
+            .department-info p {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .header h1 {
+                font-size: 0.7rem;
+                line-height: 1.1;
+            }
+
+            .logo {
+                width: 120px;
+            }
+
+            .main-title {
+                font-size: 1rem;
+                letter-spacing: 0.2px;
+            }
+
+            .company-name {
+                font-size: 0.65rem;
+            }
+
+            .venue-info {
+                font-size: 0.55rem;
+                padding: 3px 5px;
+            }
+
+            .updates-title {
+                font-size: 0.55rem;
+            }
+
+            .updates-content {
+                font-size: 0.5rem;
+            }
+
+            .department-info h2 {
+                font-size: 0.9rem;
+            }
+
+            .department-info p {
+                font-size: 0.75rem;
+            }
+
+            .block-badge {
+                font-size: 0.45rem;
+                padding: 2px 4px;
+            }
+        }
     </style>
 </head>
-<body bgcolor="white" style="color: black;">
-
-   <hr >
+<body>
+    <div class="top-bar"></div>
+    
     <div class="header">
-        <img class="img3" src="IMG_20240415_122451.png" alt="logo" width="220px" height="auto">
-        
-        <h1 class="hello"> TAMILNADU SKILL DEVELOPMENT CORPORATION NAAN MUDHALVAN STATE - WIDE PLACEMENT PROGRAM </h1>
-       
+        <img class="logo" src="./images/Logo.png" alt="logo">
+        <h1>Tamilnadu Skill Development Corporation<br>Naan Mudhalvan State-Wide Placement Program</h1>
     </div>
-   
-        
-       
-    <nav class="txt">
-        <a href="index.html">Home</a>
-      
-       
-       
+
+    <nav class="navigation">
+        <a href="index.html" class="nav-link">
+            <i class="fas fa-home"></i> Home
+        </a>
     </nav>
-    <hr>
- 
-     
-   
-    
-<div class="container">
-    <h1 style="color: black;">MEGA - JOBFAIR</h1>
-    <br>
-    <!-- Event Cards -->
 
-    <div class="event-card a-img"> 
-        <img class="img1" src="VNSURE BUSINESS SOLUTIONS.jpg" alt="Event 1">
+    <div class="divider"></div>
+
+    <div class="container">
+        <h1 class="main-title">Mega Job Fair</h1>
         
-        <div class="ece">
-            <h2 class="check">VNSURE BUSINESS SOLUTIONS</h2>
-       <p style="color: #890a0a;  font-size: 20px;">Venue: S&H Ground Floor SHGF1</p><br>
-     <div style="display: flex;"> <h4 style="color: red;" >Updates: </h4>
-       <marquee>   <h4 style="display: flex; color: red;">#################################</h4></marquee>
-    </div> 
-        </div> 
-       
+        <div class="department-info">
+            <h2><i class="fas fa-graduation-cap"></i> Science & Humanities Block</h2>
+            <p>Explore diverse opportunities across multiple industries and specializations</p>
+        </div>
+
+        <div class="companies-grid">
+            <div class="company-card">
+                <div class="block-badge">S&H BLOCK</div>
+                <div class="company-content">
+                    <div class="company-logo">
+                        <img src="./images/VNSURE BUSINESS SOLUTIONS.jpg" alt="VNSure Business Solutions Logo">
+                    </div>
+                    <div class="company-info">
+                        <h2 class="company-name">VNSure Business Solutions</h2>
+                        
+                        <div class="venue-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Venue: S&H Ground Floor SHGF1</span>
+                        </div>
+
+                        <div class="updates-section">
+                            <div class="updates-header">
+                                <i class="fas fa-bell" style="color: #e74c3c;"></i>
+                                <h4 class="updates-title">Updates:</h4>
+                            </div>
+                            <div style="overflow: hidden;">
+                                <div class="updates-content">
+                                    #################################
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="company-card">
+                <div class="block-badge">S&H BLOCK</div>
+                <div class="company-content">
+                    <div class="company-logo">
+                        <img src="./images/ONE GENE.jpeg" alt="One Gene Logo">
+                    </div>
+                    <div class="company-info">
+                        <h2 class="company-name">One Gene</h2>
+                        
+                        <div class="venue-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Venue: S&H First Floor SHFF1</span>
+                        </div>
+
+                        <div class="updates-section">
+                            <div class="updates-header">
+                                <i class="fas fa-bell" style="color: #e74c3c;"></i>
+                                <h4 class="updates-title">Updates:</h4>
+                            </div>
+                            <div style="overflow: hidden;">
+                                <div class="updates-content">
+                                    #################################
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="company-card">
+                <div class="block-badge">S&H BLOCK</div>
+                <div class="company-content">
+                    <div class="company-logo">
+                        <img src="./images/LOGSKIM.jpg" alt="LogSkim Logo">
+                    </div>
+                    <div class="company-info">
+                        <h2 class="company-name">LogSkim</h2>
+                        
+                        <div class="venue-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Venue: S&H First Floor SHFF2</span>
+                        </div>
+
+                        <div class="updates-section">
+                            <div class="updates-header">
+                                <i class="fas fa-bell" style="color: #e74c3c;"></i>
+                                <h4 class="updates-title">Updates:</h4>
+                            </div>
+                            <div style="overflow: hidden;">
+                                <div class="updates-content">
+                                    #################################
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="company-card">
+                <div class="block-badge">S&H BLOCK</div>
+                <div class="company-content">
+                    <div class="company-logo">
+                        <img src="./images/PDCS PROJECTS2.png" alt="PDCS Projects Logo">
+                    </div>
+                    <div class="company-info">
+                        <h2 class="company-name">PDCS Projects</h2>
+                        
+                        <div class="venue-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Venue: S&H First Floor SHFF3</span>
+                        </div>
+
+                        <div class="updates-section">
+                            <div class="updates-header">
+                                <i class="fas fa-bell" style="color: #e74c3c;"></i>
+                                <h4 class="updates-title">Updates:</h4>
+                            </div>
+                            <div style="overflow: hidden;">
+                                <div class="updates-content">
+                                    #################################
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="company-card">
+                <div class="block-badge">S&H BLOCK</div>
+                <div class="company-content">
+                    <div class="company-logo">
+                        <img src="./images/KEYKODERS.png" alt="KeyKoders Logo">
+                    </div>
+                    <div class="company-info">
+                        <h2 class="company-name">KeyKoders</h2>
+                        
+                        <div class="venue-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Venue: S&H First Floor SHFF4</span>
+                        </div>
+
+                        <div class="updates-section">
+                            <div class="updates-header">
+                                <i class="fas fa-bell" style="color: #e74c3c;"></i>
+                                <h4 class="updates-title">Updates:</h4>
+                            </div>
+                            <div style="overflow: hidden;">
+                                <div class="updates-content">
+                                    #################################
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="company-card">
+                <div class="block-badge">S&H BLOCK</div>
+                <div class="company-content">
+                    <div class="company-logo">
+                        <img src="./images/GS INFOMATICS.jpg" alt="GS Infomatics Logo">
+                    </div>
+                    <div class="company-info">
+                        <h2 class="company-name">GS Infomatics</h2>
+                        
+                        <div class="venue-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Venue: S&H First Floor SHFF5</span>
+                        </div>
+
+                        <div class="updates-section">
+                            <div class="updates-header">
+                                <i class="fas fa-bell" style="color: #e74c3c;"></i>
+                                <h4 class="updates-title">Updates:</h4>
+                            </div>
+                            <div style="overflow: hidden;">
+                                <div class="updates-content">
+                                    #################################
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="company-card">
+                <div class="block-badge">S&H BLOCK</div>
+                <div class="company-content">
+                    <div class="company-logo">
+                        <img src="./images/SPARK SKILL DEVELOPMENT CENTRE.jpeg" alt="Spark Skill Development Centre Logo">
+                    </div>
+                    <div class="company-info">
+                        <h2 class="company-name">Spark Skill Development Centre</h2>
+                        
+                        <div class="venue-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Venue: S&H Second Floor SHSF1</span>
+                        </div>
+
+                        <div class="updates-section">
+                            <div class="updates-header">
+                                <i class="fas fa-bell" style="color: #e74c3c;"></i>
+                                <h4 class="updates-title">Updates:</h4>
+                            </div>
+                            <div style="overflow: hidden;">
+                                <div class="updates-content">
+                                    #################################
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="company-card">
+                <div class="block-badge">S&H BLOCK</div>
+                <div class="company-content">
+                    <div class="company-logo">
+                        <img src="./images/MY TOWN MEDIA.jpeg" alt="My Town Media Logo">
+                    </div>
+                    <div class="company-info">
+                        <h2 class="company-name">My Town Media</h2>
+                        
+                        <div class="venue-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Venue: S&H Second Floor SHSF2</span>
+                        </div>
+
+                        <div class="updates-section">
+                            <div class="updates-header">
+                                <i class="fas fa-bell" style="color: #e74c3c;"></i>
+                                <h4 class="updates-title">Updates:</h4>
+                            </div>
+                            <div style="overflow: hidden;">
+                                <div class="updates-content">
+                                    #################################
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="company-card">
+                <div class="block-badge">S&H BLOCK</div>
+                <div class="company-content">
+                    <div class="company-logo">
+                        <img src="./images/CAMPUS CONNECTIONS.png" alt="Campus Connections Logo">
+                    </div>
+                    <div class="company-info">
+                        <h2 class="company-name">Campus Connections</h2>
+                        
+                        <div class="venue-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Venue: S&H Second Floor SHSF3</span>
+                        </div>
+
+                        <div class="updates-section">
+                            <div class="updates-header">
+                                <i class="fas fa-bell" style="color: #e74c3c;"></i>
+                                <h4 class="updates-title">Updates:</h4>
+                            </div>
+                            <div style="overflow: hidden;">
+                                <div class="updates-content">
+                                    #################################
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="company-card">
+                <div class="block-badge">S&H BLOCK</div>
+                <div class="company-content">
+                    <div class="company-logo">
+                        <img src="./images/LUMINA DATAMATICS.jpg" alt="Lumina Datamatics Logo">
+                    </div>
+                    <div class="company-info">
+                        <h2 class="company-name">Lumina Datamatics</h2>
+                        
+                        <div class="venue-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Venue: S&H Second Floor SHSF4</span>
+                        </div>
+
+                        <div class="updates-section">
+                            <div class="updates-header">
+                                <i class="fas fa-bell" style="color: #e74c3c;"></i>
+                                <h4 class="updates-title">Updates:</h4>
+                            </div>
+                            <div style="overflow: hidden;">
+                                <div class="updates-content">
+                                    #################################
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="company-card">
+                <div class="block-badge">S&H BLOCK</div>
+                <div class="company-content">
+                    <div class="company-logo">
+                        <img src="./images/DECCAN I SERVICES.png" alt="Deccan I Services Logo">
+                    </div>
+                    <div class="company-info">
+                        <h2 class="company-name">Deccan I Services</h2>
+                        
+                        <div class="venue-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Venue: S&H Second Floor SHSF5</span>
+                        </div>
+
+                        <div class="updates-section">
+                            <div class="updates-header">
+                                <i class="fas fa-bell" style="color: #e74c3c;"></i>
+                                <h4 class="updates-title">Updates:</h4>
+                            </div>
+                            <div style="overflow: hidden;">
+                                <div class="updates-content">
+                                    #################################
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-
-        <div class="event-card a-img"> 
-            <img class="img1" src="ONE GENE.jpeg" alt="Event 1">
-            
-            <div class="ece">
-                <h2 class="check">ONE GENE </h2>
-           <p style="color: #890a0a;  font-size: 20px;">Venue: S&H First Floor SHFF1</p><br>
-         <div style="display: flex;"> <h4 style="color: red;" >Updates: </h4>
-           <marquee>   <h4 style="display: flex; color: red;">#################################</h4></marquee>
-        </div> 
-            </div> 
-           
+    <footer class="footer">
+        <div class="footer-text">
+            <i class="fas fa-code"></i> Website Powered by CSBS Department <i class="fas fa-graduation-cap"></i>
         </div>
- 
-
-
-
-        <div class="event-card a-img"> 
-            <img class="img1" src="LOGSKIM.jpg" alt="Event 1">
-            
-            <div class="ece">
-                <h2 class="check">LOGSKIM </h2>
-           <p style="color: #890a0a;  font-size: 20px;">Venue: S&H First Floor SHFF2</p><br>
-         <div style="display: flex;"> <h4 style="color: red;" >Updates: </h4>
-           <marquee>   <h4 style="display: flex; color: red;">#################################</h4></marquee>
-        </div> 
-            </div> 
-           
-        </div>
-
-
-        <div class="event-card a-img"> 
-            <img class="img1" src="PDCS PROJECTS2.png" alt="Event 1">
-            
-            <div class="ece">
-                <h2 class="check"> PDCS PROJECTS </h2>
-           <p style="color: #890a0a;  font-size: 20px;">Venue: S&H First Floor SHFF3</p><br>
-         <div style="display: flex;"> <h4 style="color: red;" >Updates: </h4>
-           <marquee>   <h4 style="display: flex; color: red;">#################################</h4></marquee>
-        </div> 
-            </div> 
-           
-        </div>
-
-        <div class="event-card a-img"> 
-            <img class="img1" src="KEYKODERS.png" alt="Event 1">
-            
-            <div class="ece">
-                <h2 class="check">KEYKODERS</h2>
-           <p style="color: #890a0a;  font-size: 20px;">Venue: S&H First Floor SHFF4  </p><br>
-         <div style="display: flex;"> <h4 style="color: red;" >Updates: </h4>
-           <marquee>   <h4 style="display: flex; color: red;">#################################</h4></marquee>
-        </div> 
-            </div> 
-           
-        </div>
-        <div class="event-card a-img"> 
-            <img class="img1" src="GS INFOMATICS.jpg" alt="Event 1">
-            
-            <div class="ece">
-                <h2 class="check">GS INFOMATICS </h2>
-           <p style="color: #890a0a;  font-size: 20px;">Venue: S&H First Floor SHFF5 </p><br>
-         <div style="display: flex;"> <h4 style="color: red;" >Updates: </h4>
-           <marquee>   <h4 style="display: flex; color: red;">#################################</h4></marquee>
-        </div> 
-            </div> 
-           
-        </div>
-        <div class="event-card a-img"> 
-            <img class="img1" src="SPARK SKILL DEVELOPMENT CENTRE.jpeg" alt="Event 1">
-            
-            <div class="ece">
-                <h2 class="check">SPARK SKILL DEVELOPMENT CENTRE  </h2>
-           <p style="color: #890a0a;  font-size: 20px;">Venue: S&H Second Floor SHSF1 </p><br>
-         <div style="display: flex;"> <h4 style="color: red;" >Updates: </h4>
-           <marquee>   <h4 style="display: flex; color: red;">#################################</h4></marquee>
-        </div> 
-            </div> 
-           
-        </div>
-        <div class="event-card a-img"> 
-            <img class="img1" src="MY TOWN MEDIA.jpeg" alt="Event 1">
-            
-            <div class="ece">
-                <h2 class="check"> MY TOWN MEDIA </h2>
-           <p style="color: #890a0a;  font-size: 20px;">Venue: S&H Second Floor SHSF2</p><br>
-         <div style="display: flex;"> <h4 style="color: red;" >Updates: </h4>
-           <marquee>   <h4 style="display: flex; color: red;">#################################</h4></marquee>
-        </div> 
-            </div> 
-           
-        </div>
-        <div class="event-card a-img"> 
-            <img class="img1" src="CAMPUS CONNECTIONS.png" alt="Event 1">
-            
-            <div class="ece">
-                <h2 class="check">CAMPUS CONNECTIONS </h2>
-           <p style="color: #890a0a;  font-size: 20px;">Venue: S&H  Second Floor SHSF3</p><br>
-         <div style="display: flex;"> <h4 style="color: red;" >Updates: </h4>
-           <marquee>   <h4 style="display: flex; color: red;">#################################</h4></marquee>
-        </div> 
-            </div> 
-           
-        </div>
-        <div class="event-card a-img"> 
-            <img class="img1" src="LUMINA DATAMATICS.jpg" alt="Event 1">
-            
-            <div class="ece">
-                <h2 class="check">LUMINA DATAMATICS </h2>
-           <p style="color: #890a0a;  font-size: 20px;">Venue: S&H Second Floor SHSF4  </p><br>
-         <div style="display: flex;"> <h4 style="color: red;" >Updates: </h4>
-           <marquee>   <h4 style="display: flex; color: red;">#################################</h4></marquee>
-        </div> 
-            
-       
-       
-            </div> 
-        
-        
-        
-        
-        
-        
-        
-        
-        </div>
-
-
-
-
-        <div class="event-card a-img"> 
-            <img class="img1" src="DECCAN I SERVICES.png" alt="Event 1">
-            
-            <div class="ece">
-                <h2> DECCAN I SERVICES   </h2>
-           <p style="color: #890a0a;  font-size: 20px;">Venue: S&H Second Floor SHSF5</p><br>
-         <div style="display: flex;"> <h4 style="color: red;" >Updates: </h4>
-           <marquee>   <h4 style="display: flex; color: red;">#################################</h4></marquee>
-        </div> 
-            </div> 
-           
-        </div>
-
-
-
-</div>
-
-<footer>
-
-    <marquee>    <p>Website Powered by CSBS Department</p></marquee>
     </footer>
-    </body>
-    </html>
-    
-    
-    
+</body>
+</html>
